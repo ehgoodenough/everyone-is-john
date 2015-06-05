@@ -8,16 +8,30 @@
 </body>
 
 <template name="router">
-    {{#if view}}
-        {{> generate}}
+    {{#if view 1}}
+        {{> information}}
     {{else}}
-        {{> configure}}
+        {{#if view 2}}
+            {{> configure}}
+        {{else}}
+            {{#if view 3}}
+                {{> generate}}
+            {{/if}}
+        {{/if}}
     {{/if}}
 </template>
 
 <template name="header">
     <header>
-        <img src="./banner.jpg"/>
+        <h1>
+            <img src="./banner.jpg"
+                 alt="Everyone is John"/>
+        </h1>
+    </header>
+</template>
+
+<template name="information">
+    <div>
         <div>
             Welcome to the <b>Everyone is John Character Generator</b>!
         </div>
@@ -34,56 +48,101 @@
             We could really use your help.
         </div>
         <br/>
-    </header>
+        <button>
+            Let's get started!!
+        </button>
+    </div>
 </template>
 
-<template name="generate">
-    <div id="generate">
-        <div id="output">
+<template name="configure">
+    <form>
+        <div>
+            <h2>Name:</h2>
+            <input type="text"
+                   value="{{name}}"
+                   name="name"/>
+        </div>
+        <br/>
+        <div>
+            <h2>Willpower:</h2>
             <div>
-                <h2>Name:</h2>
-                {{name}}
+                <input type="radio"
+                       name="willpower"
+                       id="a" value="7"
+                       {{isChecked 7}}/>
+                <label for="a">
+                    7 willpower and 3 skills
+                </label>
             </div>
-            <br/>
             <div>
-                <h2>Willpower:</h2>
-                {{willpower}} points
+                <input type="radio"
+                       name="willpower"
+                       id="b" value="10"
+                       {{isChecked 10}}/>
+                <label for="b">
+                    10 willpower and 2 skills
+                </label>
             </div>
-            <br/>
-            <div class="question">
-                <h2>
-                    Skills:
-                </h2>
-                <ol>
-                    {{#each skills}}
-                        <li>
-                            <span contenteditable>
-                                {{this}}
-                            </span>
-                        </li>
-                    {{/each}}
-                </ol>
-            </div>
-            <br/>
-            <div class="question">
-                <h2>
-                    Obsessions:
-                </h2>
-                <ol>
-                    {{#each obsessions}}
-                        <li>
-                            <span contenteditable>
-                                {{this}}
-                            </span>
-                        </li>
-                    {{/each}}
-                </ol>
+            <div>
+                <input type="radio"
+                       name="willpower"
+                       id="c" value="13"
+                       {{isChecked 13}}/>
+                <label for="c">
+                    13 willpower and 1 skills
+                </label>
             </div>
         </div>
         <br/>
         <div>
-            <button id="configure">Configure</button>
-            <button id="randomize">Randomize</button>
+            <input type="submit"
+                   value="Generate"/>
+        </div>
+    </form>
+</template>
+
+<template name="generate">
+    <div>
+        <br/>
+        <div>
+            <h2>Name:</h2>
+            {{name}}
+        </div>
+        <br/>
+        <div>
+            <h2>Willpower:</h2>
+            {{willpower}} points
+        </div>
+        <br/>
+        <div>
+            <h2>Skills:</h2>
+            <ol>
+                {{#each skills}}
+                    <li>
+                        <span contenteditable>
+                            {{this}}
+                        </span>
+                    </li>
+                {{/each}}
+            </ol>
+        </div>
+        <br/>
+        <div>
+            <h2>Obsessions:</h2>
+            <ol>
+                {{#each obsessions}}
+                    <li>
+                        <span contenteditable>
+                            {{this}}
+                        </span>
+                    </li>
+                {{/each}}
+            </ol>
+        </div>
+        <br/>
+        <div>
+            <button id="configure">Reconfigure</button>
+            <button id="randomize">Rerandomize</button>
             <button id="download">Download</button>
         </div>
     </div>

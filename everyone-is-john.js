@@ -1,93 +1,18 @@
-var names = [
-    "John",
-    "Jon",
-    "Jonathon",
-    "Johnny",
-    "Johnson",
-    "Jean"
-]
-
 var Skills = new Mongo.Collection("skills")
 var Obsessions = new Mongo.Collection("obsessions")
 
-var DefaultSkills = [
-    "Lying",
-    "Climbing",
-    "Kick-boxing",
-    "Lock-picking",
-    "Pick-pocketing",
-    "Starting fires",
-    "Eating way too much",
-    "Giving motivational speeches",
-    "Surviving falls from great heights",
-    "Assembling and detonating explosives",
-    "Creating and using improvisational weapons",
-    "Performing magic tricks with a deck of cards",
-    "Dropping an assortment of expletives",
-    "Running for long distances",
-    "Hiding anywhere",
-    "Parallel parking",
-    "Break dancing",
-    "Parkour",
-]
-
-var DefaultObsessions = [
-    [
-        "Eat candy",
-        "Yell at a child",
-        "Take a nap in public",
-        "Do a barrel roll",
-        "Play a game of golf",
-    ],
-    [
-        "Prepare for the oncoming apocalypse",
-        "Reenact a scene from Les Misérables",
-        "Pretend to be a bird",
-        "Sell your organs on the black market",
-        "Punch somebody in a uniform"
-    ],
-    [
-        "Convince someone that this is a game of 'Everone is John'",
-        "Have burgers with the president of the United States of America",
-        "Get away with murder",
-        "Go to the moon",
-        "Ride a dinosaur",
-        "Walk away from an explosion like an action hero"
-    ]
-]
-
-var getSkillcap = function(willpower) {
-    return ((13 - willpower) / 3) + 1
-}
-
-var getRandomSkills = function(skillcap) {
-    var returnables = new Array()
-    for(var index = 0; index < skillcap; index++) {
-        var skill = Skills.findOne({}, {sort: {"key": 1}})
-        Skills.update(skill._id, {$inc: {"key": 1 + Math.random()}})
-        returnables.push(skill.value)
-    }
-    return returnables
-}
-
-var getRandomObsessions = function() {
-    var returnables = new Array()
-    for(var index = 0; index < 3; index++) {
-        var obsession = Obsessions.findOne({"level": index + ""}, {sort: {"key": 1}})
-        Obsessions.update(obsession._id, {$inc: {"key": 1 + Math.random()}})
-        returnables.push(obsession.value)
-    }
-    return returnables
-}
-
 if(Meteor.isClient) {
     
-    Session.set("view", false)
-    Session.set("name", names[Math.floor(Math.random() * names.length)])
-    Session.set("willpower", 10)
+    Session.set("view", 1)
+    Session.setDefault("name", "John")
+    Session.setDefault("willpower", 10)
     
-    Template.registerHelper("view", function() {
-        return Session.get("view")
+    Template.registerHelper("view", function(view) {
+        if(view != undefined) {
+            return Session.get("view") == view
+        } else {
+            return Session.get("view")
+        }
     })
     Template.registerHelper("name", function() {
         return Session.get("name")
@@ -100,6 +25,12 @@ if(Meteor.isClient) {
     })
     Template.registerHelper("obsessions", function() {
         return Session.get("obsessions")
+    })
+    
+    Template.information.events({
+        "click button": function() {
+            Session.set("view", 2)
+        }
     })
     
     Template.configure.helpers({
@@ -120,21 +51,24 @@ if(Meteor.isClient) {
                     + "a name, and how much willpower you're "
                     + "willing to trade for skills. Thanks!!")
             } else {
-                var skillcap = getSkillcap(willpower)
-                var skills = getRandomSkills(skillcap)
-                var obsessions = getRandomObsessions()
                 Session.set("name", name)
                 Session.set("willpower", willpower)
+                
+                var skillcap = getSkillcap(willpower)
+                var skills = getRandomSkills(skillcap)
                 Session.set("skills", skills)
+                
+                var obsessions = getRandomObsessions()
                 Session.set("obsessions", obsessions)
-                Session.set("view", true)
+                
+                Session.set("view", 3)
             }
         }
     })
     
     Template.generate.events({
         "click #configure": function() {
-            Session.set("view", false)
+            Session.set("view", 2)
         },
         "click #randomize": function() {
             var willpower = Session.get("willpower")
@@ -190,4 +124,29 @@ if(Meteor.isServer) {
             }
         }
     })
+}
+
+
+var getSkillcap = function(willpower) {
+    return ((13 - willpower) / 3) + 1
+}
+
+var getRandomSkills = function(skillcap) {
+    var returnables = new Array()
+    for(var index = 0; index < skillcap; index++) {
+        var skill = Skills.findOne({}, {sort: {"key": 1}})
+        Skills.update(skill._id, {$inc: {"key": 1 + Math.random()}})
+        returnables.push(skill.value)
+    }
+    return returnables
+}
+
+var getRandomObsessions = function() {
+    var returnables = new Array()
+    for(var index = 0; index < 3; index++) {
+        var obsession = Obsessions.findOne({"level": index + ""}, {sort: {"key": 1}})
+        Obsessions.update(obsession._id, {$inc: {"key": 1 + Math.random()}})
+        returnables.push(obsession.value)
+    }
+    return returnables
 }
