@@ -33,67 +33,84 @@
 <template name="information">
     <div>
         <div>
-            Welcome to the <b>Everyone is John Character Generator</b>!
+            <p>
+                Welcome to the <b>Everyone is John Character Generator</b>!
+            </p>
         </div>
-        <br/>
         <div>
-            Huh? You're new to John? You just woke up and you don't know where or who you are? Don't worry!
-            <a href="http://bit.ly/1KPFkUi" target="_blank">Click here to read the rules.</a>
-            It'll only take, like, five minutes. And it's really fun!
+            <p>
+                Huh? You're new to John? You just woke up and you don't know where or who you are? Don't worry!
+                <a href="http://bit.ly/1KPFkUi" target="_blank">Click here to read the rules.</a>
+                It'll only take, like, five minutes. And it's really fun!
+            </p>
         </div>
-        <br/>
         <div>
-            If you want to contribute to the project, and maybe suggest some more obsessions and skills,
-            <a href="https://github.com/ehgoodenough/everyone-is-john" target="_blank">fork us on Github!</a>
-            We could really use your help.
+            <p>
+                If you want to contribute to the project, and maybe suggest some more obsessions and skills,
+                <a href="https://github.com/ehgoodenough/everyone-is-john" target="_blank">fork us on Github!</a>
+                We could really use your help.
+            </p>
         </div>
-        <br/>
-        <button>
-            Let's get started!!
-        </button>
+        <div>
+            <button>
+                Let's get started!!
+            </button>
+        </div>
     </div>
 </template>
 
 <template name="configure">
     <form>
         <div>
-            <h2>Name:</h2>
+            <h2>
+                Name:
+            </h2>
+            <i>
+                What is the name of your Voice?
+            </i>
             <input type="text"
                    value="{{name}}"
                    name="name"/>
         </div>
-        <br/>
         <div>
-            <h2>Willpower:</h2>
-            <div>
-                <input type="radio"
-                       name="willpower"
-                       id="a" value="7"
-                       {{isChecked 7}}/>
-                <label for="a">
-                    7 willpower and 3 skills
-                </label>
-            </div>
-            <div>
-                <input type="radio"
-                       name="willpower"
-                       id="b" value="10"
-                       {{isChecked 10}}/>
-                <label for="b">
-                    10 willpower and 2 skills
-                </label>
-            </div>
-            <div>
-                <input type="radio"
-                       name="willpower"
-                       id="c" value="13"
-                       {{isChecked 13}}/>
-                <label for="c">
-                    13 willpower and 1 skills
-                </label>
-            </div>
+            <h2>
+                Willpower:
+            </h2>
+            <i>
+                You, like all the other Voices, get to tell John what to do. But
+                only while fighting with all the other Voices using your willpower.
+                Would you like your Voice to have more willpower or more skills?
+            </i>
+            <ul>
+                <li>
+                    <input type="radio"
+                           name="willpower"
+                           id="a" value="7"
+                           {{isChecked 7}}/>
+                    <label for="a">
+                        7 willpower and 3 skills
+                    </label>
+                </li>
+                <li>
+                    <input type="radio"
+                           name="willpower"
+                           id="b" value="10"
+                           {{isChecked 10}}/>
+                    <label for="b">
+                        10 willpower and 2 skills
+                    </label>
+                </li>
+                <li>
+                    <input type="radio"
+                           name="willpower"
+                           id="c" value="13"
+                           {{isChecked 13}}/>
+                    <label for="c">
+                        13 willpower and 1 skills
+                    </label>
+                </li>
+            </ul>
         </div>
-        <br/>
         <div>
             <input type="submit"
                    value="Generate"/>
@@ -103,19 +120,25 @@
 
 <template name="generate">
     <div>
-        <br/>
+        <div>
+            <p>
+                Here is the character sheet for your Voice! Anything that
+                was randomly generated is underlined, and can be edited.
+                You may also choose to rerandomize your character.
+            </p>
+        </div>
         <div>
             <h2>Name:</h2>
             {{name}}
         </div>
-        <br/>
         <div>
             <h2>Willpower:</h2>
             {{willpower}} points
         </div>
-        <br/>
         <div>
-            <h2>Skills:</h2>
+            <h2>
+                Skills:
+            </h2>
             <ol>
                 {{#each skills}}
                     <li>
@@ -126,9 +149,10 @@
                 {{/each}}
             </ol>
         </div>
-        <br/>
         <div>
-            <h2>Obsessions:</h2>
+            <h2>
+                Obsessions:
+            </h2>
             <ol>
                 {{#each obsessions}}
                     <li>
@@ -139,10 +163,8 @@
                 {{/each}}
             </ol>
         </div>
-        <br/>
         <div>
-            <button id="configure">Reconfigure</button>
-            <button id="randomize">Rerandomize</button>
+            <button id="randomize">Randomize</button>
             <button id="download">Download</button>
         </div>
     </div>

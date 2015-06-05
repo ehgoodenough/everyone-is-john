@@ -18,15 +18,27 @@ body
     font-family: cambria, serif;
 }
 
-img
+div:not(:last-child)
 {
-    width: 100%;
+    margin-bottom: 1em;
 }
 
 h2
 {
     font-size: 1.5em;
     font-weight: bold;
+}
+
+i
+{
+    display: block;
+    margin-bottom: 1em;
+}
+
+img
+{
+    width: 100%;
+    display: block;
 }
 
 input, button
@@ -43,7 +55,7 @@ span
     border-bottom-style: dashed;
 }
 
-ol
+ol, ul
 {
     counter-reset: item;
     list-style-type: none;
@@ -57,7 +69,6 @@ ol   li:not(:last-of-type)
 ol   li:before
 {
     font-weight: bold;
-    
     counter-increment: item;
     content: counter(item, decimal) ": ";
 }
