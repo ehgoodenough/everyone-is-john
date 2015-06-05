@@ -1,0 +1,90 @@
+<head>
+    <title>Everyone is John</title>
+</head>
+
+<body>
+    {{> header}}
+    {{> router}}
+</body>
+
+<template name="router">
+    {{#if view}}
+        {{> generate}}
+    {{else}}
+        {{> configure}}
+    {{/if}}
+</template>
+
+<template name="header">
+    <header>
+        <img src="./banner.jpg"/>
+        <div>
+            Welcome to the <b>Everyone is John Character Generator</b>!
+        </div>
+        <br/>
+        <div>
+            Huh? You're new to John? You just woke up and you don't know where or who you are? Don't worry!
+            <a href="http://bit.ly/1KPFkUi" target="_blank">Click here to read the rules.</a>
+            It'll only take, like, five minutes. And it's really fun!
+        </div>
+        <br/>
+        <div>
+            If you want to contribute to the project, and maybe suggest some more obsessions and skills,
+            <a href="https://github.com/ehgoodenough/everyone-is-john" target="_blank">fork us on Github!</a>
+            We could really use your help.
+        </div>
+        <br/>
+    </header>
+</template>
+
+<template name="generate">
+    <div id="generate">
+        <div id="output">
+            <div>
+                <h2>Name:</h2>
+                {{name}}
+            </div>
+            <br/>
+            <div>
+                <h2>Willpower:</h2>
+                {{willpower}} points
+            </div>
+            <br/>
+            <div class="question">
+                <h2>
+                    Skills:
+                </h2>
+                <ol>
+                    {{#each skills}}
+                        <li>
+                            <span contenteditable>
+                                {{this}}
+                            </span>
+                        </li>
+                    {{/each}}
+                </ol>
+            </div>
+            <br/>
+            <div class="question">
+                <h2>
+                    Obsessions:
+                </h2>
+                <ol>
+                    {{#each obsessions}}
+                        <li>
+                            <span contenteditable>
+                                {{this}}
+                            </span>
+                        </li>
+                    {{/each}}
+                </ol>
+            </div>
+        </div>
+        <br/>
+        <div>
+            <button id="configure">Configure</button>
+            <button id="randomize">Randomize</button>
+            <button id="download">Download</button>
+        </div>
+    </div>
+</template>
