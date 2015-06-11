@@ -4,6 +4,7 @@ DefaultNames = [
     "Jonathon",
     "Johnny",
     "Johnson",
+    "Janeane",
     "Jean"
 ]
 
@@ -11,8 +12,10 @@ DefaultSkills = [
     "Lying",
     "Climbing",
     "Kick-boxing",
+    "Speed eating",
     "Lock-picking",
     "Pick-pocketing",
+    "Throwing boxes",
     "Starting fires",
     "Eating way too much",
     "Giving motivational speeches",
@@ -35,8 +38,10 @@ DefaultObsessions = [
         "Take a nap in public",
         "Do a barrel roll",
         "Play a game of golf",
+        "Interrupt lectures",
     ],
     [
+        "Participate in a flash mob",
         "Prepare for the oncoming apocalypse",
         "Reenact a scene from Les Misérables",
         "Pretend to be a bird",
@@ -49,6 +54,7 @@ DefaultObsessions = [
         "Get away with murder",
         "Go to the moon",
         "Ride a dinosaur",
+        "Get a doctorate",
         "Walk away from an explosion like an action hero"
     ]
 ]
