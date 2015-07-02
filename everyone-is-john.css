@@ -10,22 +10,27 @@
 
 body
 {
-    padding: 1em;
+    padding: 2em;
     margin: auto;
 
     color: #111;
     font-family: cambria, serif;
 }
 
-div:not(:last-child)
+header
+{
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+section:not(:last-child)
 {
     margin-bottom: 1em;
 }
 
-h2
+form
 {
-    font-size: 1.5em;
-    font-weight: bold;
+    margin: 1em auto;
 }
 
 i
@@ -43,6 +48,8 @@ img
 input, button
 {
     font: inherit;
+
+    width: 100%;
     padding: 0.15em 0.45em;
 }
 

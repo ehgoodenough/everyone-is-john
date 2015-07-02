@@ -6,17 +6,34 @@
 </body>
 
 <template name="game">
-    {{name}}
+    <section>
+        <header>
+            {{this.name}}
+        </header>
+    </section>
+    <section>
+        <form id="chat">
+            <input name="message" type="text"
+                placeholder="Say something!"/>
+        </form>
+        {{#each this.chat}}
+            <div class="chat">
+                <b>{{this.author}}:</b>
+                {{this.message}}
+            </div>
+        {{/each}}
+    </section>
+        {{print}}
 </template>
 
 <template name="new_game">
-    {{print}}
     <form>
-        <label for="name">Name</label>
-        <input id="name" name="name" type="text"/>
+        <input name="name" type="text"
+            placeholder="Name of your game"
+            value="{{this.name}}"/>
     </form>
 </template>
 
 <template name="home">
-    Welcome home.
+    <a href="/game">Play a game!</a>
 </template>
