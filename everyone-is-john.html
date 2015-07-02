@@ -3,169 +3,20 @@
 </head>
 
 <body>
-    {{> header}}
-    {{> router}}
 </body>
 
-<template name="router">
-    {{#if view 1}}
-        {{> information}}
-    {{else}}
-        {{#if view 2}}
-            {{> configure}}
-        {{else}}
-            {{#if view 3}}
-                {{> generate}}
-            {{/if}}
-        {{/if}}
-    {{/if}}
+<template name="game">
+    {{name}}
 </template>
 
-<template name="header">
-    <header>
-        <h1>
-            <img src="./banner.jpg"
-                 alt="Everyone is John"/>
-        </h1>
-    </header>
-</template>
-
-<template name="information">
-    <div>
-        <div>
-            <p>
-                Welcome to the <b>Everyone is John Character Generator</b>!
-            </p>
-        </div>
-        <div>
-            <p>
-                Huh? You're new to John? You just woke up and you don't know where or who you are? Don't worry!
-                <a href="http://bit.ly/1KPFkUi" target="_blank">Click here to read the rules.</a>
-                It'll only take, like, five minutes. And it's really fun!
-            </p>
-        </div>
-        <div>
-            <p>
-                If you want to contribute to the project, and maybe suggest some more obsessions and skills,
-                <a href="https://github.com/ehgoodenough/everyone-is-john" target="_blank">fork us on Github!</a>
-                We could really use your help.
-            </p>
-        </div>
-        <div>
-            <button>
-                Let's get started!!
-            </button>
-        </div>
-    </div>
-</template>
-
-<template name="configure">
+<template name="new_game">
+    {{print}}
     <form>
-        <div>
-            <h2>
-                Name:
-            </h2>
-            <i>
-                What is the name of your Voice?
-            </i>
-            <input type="text"
-                   value="{{name}}"
-                   name="name"/>
-        </div>
-        <div>
-            <h2>
-                Willpower:
-            </h2>
-            <i>
-                You, like all the other Voices, get to tell John what to do. But
-                only while fighting with all the other Voices using your willpower.
-                Would you like your Voice to have more willpower or more skills?
-            </i>
-            <ul>
-                <li>
-                    <input type="radio"
-                           name="willpower"
-                           id="a" value="7"
-                           {{isChecked 7}}/>
-                    <label for="a">
-                        7 willpower and 3 skills
-                    </label>
-                </li>
-                <li>
-                    <input type="radio"
-                           name="willpower"
-                           id="b" value="10"
-                           {{isChecked 10}}/>
-                    <label for="b">
-                        10 willpower and 2 skills
-                    </label>
-                </li>
-                <li>
-                    <input type="radio"
-                           name="willpower"
-                           id="c" value="13"
-                           {{isChecked 13}}/>
-                    <label for="c">
-                        13 willpower and 1 skills
-                    </label>
-                </li>
-            </ul>
-        </div>
-        <div>
-            <input type="submit"
-                   value="Generate"/>
-        </div>
+        <label for="name">Name</label>
+        <input id="name" name="name" type="text"/>
     </form>
 </template>
 
-<template name="generate">
-    <div>
-        <div>
-            <p>
-                Here is the character sheet for your Voice! Anything that
-                was randomly generated is underlined, and can be edited.
-                You may also choose to rerandomize your character.
-            </p>
-        </div>
-        <div>
-            <h2>Name:</h2>
-            {{name}}
-        </div>
-        <div>
-            <h2>Willpower:</h2>
-            {{willpower}} points
-        </div>
-        <div>
-            <h2>
-                Skills:
-            </h2>
-            <ol>
-                {{#each skills}}
-                    <li>
-                        <span contenteditable>
-                            {{this}}
-                        </span>
-                    </li>
-                {{/each}}
-            </ol>
-        </div>
-        <div>
-            <h2>
-                Obsessions:
-            </h2>
-            <ol>
-                {{#each obsessions}}
-                    <li>
-                        <span contenteditable>
-                            {{this}}
-                        </span>
-                    </li>
-                {{/each}}
-            </ol>
-        </div>
-        <div>
-            <button id="randomize">Randomize</button>
-            <button id="download">Download</button>
-        </div>
-    </div>
+<template name="home">
+    Welcome home.
 </template>
