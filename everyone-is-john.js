@@ -1,31 +1,31 @@
 var Games = new Mongo.Collection("games")
+var Users = new Mongo.Collection("users")
 
 if(Meteor.isClient) {
-    Session.set("player", {
-        "name": "John"
-    })
+    var user = Users.insert({})
+    Session.set("user", user)
 
     Router.route("/", function() {
         this.render("home")
     })
-    Router.route("/game", function() {
+    Router.route("/play", function() {
         this.render("new_game")
     })
-    Router.route("/game/:name", function() {
-        var game_name = this.params.name
+    Router.route("/play/:code", function() {
+        var game_code = this.params.code
         var game = Games.findOne({
-            "name": game_name
+            "code": game_code
         })
         if(game == undefined) {
             this.render("new_game", {
                 "data": {
-                    "name": game_name
+                    "code": game_code
                 }
             })
         } else {
             this.render("game", {
                 "data": Games.findOne({
-                    "name": game_name
+                    "code": game_code
                 })
             })
         }
@@ -38,12 +38,12 @@ if(Meteor.isClient) {
     Template.game.events({
         "submit #chat": function(event) {
             event.preventDefault()
-            var author = Session.get("player").name
+            var author = Session.get("user")
             var message = event.target.message.value
             event.target.message.value = new String()
             Games.update(this._id, {
                 "$push": {
-                    "chat": {
+                    "chats": {
                         "author": author,
                         "message": message
                     }
@@ -55,17 +55,21 @@ if(Meteor.isClient) {
     Template.new_game.events({
         "submit form": function(event) {
             event.preventDefault()
+            var game_master = Session.get("user")
             var game_name = event.target.name.value
+            var game_code = game_name.toLowerCase()
             var game = Games.findOne({
-                "name": game_name
+                "code": game_code
             })
             if(game != undefined) {
                 alert(game_name + " already exists")
             } else {
-                Router.go("/game/" + window.encodeURI(game_name))
+                Router.go("/play/" + game_code)
                 Games.insert({
+                    "code": game_code,
                     "name": game_name,
-                    "chat": new Array()
+                    "chats": new Array(),
+                    "master": game_master
                 })
             }
         }
@@ -76,8 +80,10 @@ if(Meteor.isServer) {
     Meteor.startup(function() {
         Games.remove({})
         Games.insert({
-            "name": "awesomesauce",
-            "chat": new Array()
+            "name": "Awesomesauce",
+            "code": "awesomesauce",
+            "master": "PM9LKALL2ATCY27VV",
+            "chats": new Array()
         })
     })
 }

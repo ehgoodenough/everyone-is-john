@@ -17,15 +17,21 @@ body
     font-family: cambria, serif;
 }
 
-header
-{
-    font-size: 1.5em;
-    font-weight: bold;
-}
-
 section:not(:last-child)
 {
     margin-bottom: 1em;
+}
+
+h1
+{
+    font-size: 2em;
+    font-weight: bold;
+}
+
+h2
+{
+    font-size: 1.5em;
+    font-weight: bold;
 }
 
 form
